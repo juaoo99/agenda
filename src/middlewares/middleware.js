@@ -7,7 +7,7 @@ exports.meuMiddleware = (req, res, next) => {
 
 // Middleware para tratar erros de CSRF
 exports.checkCsrferror = (err, req, res, next) => {
-    if (err && 'EBADCSRFTOKEN' === err.code) {
+    if (err) {
         return res.render('404');
     }
     next(); // Chame next para passar para o próximo middleware
