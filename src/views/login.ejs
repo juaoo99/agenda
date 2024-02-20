@@ -9,18 +9,21 @@
         </div>
         <div class="col-lg-8 my-5">
             <h3 class="text-left text-white">Se registre ou faça login</h3>
-            <div class="row my-5">
+
+            <%- include('includes/messages.ejs') %>
+
+            <div class="row">
                 <div class="col">
                     <h4>Faça seu cadastro</h4>
                     <form action="/login/register" method="POST">
                         <input type="hidden" name="_csrf" value=<%- csrfToken %> />
                         <div class="mb-3 form-group">
                           <label class="form-label">Email</label>
-                          <input type="email" class="form-control">
+                          <input type="email" class="form-control" name="email">
                         </div>
                         <div class="mb-3 form-group">
                           <label class="form-label">Senha</label>
-                          <input type="password" class="form-control">
+                          <input type="password" class="form-control" name="password">
                         </div>
                         <button type="submit" class="btn btn-primary">Criar conta</button>
                       </form>
@@ -28,15 +31,15 @@
 
                 <div class="col">
                     <h4>Login</h4>
-                    <form action="/login/login" method="POST">
+                    <form action="/login/login" method="post">
                         <input type="hidden" name="_csrf" value=<%- csrfToken %> />
                         <div class="mb-3 form-group">
                           <label class="form-label">Email</label>
-                          <input type="email" class="form-control">
+                          <input type="email" class="form-control" name="email">
                         </div>
                         <div class="mb-3 form-group">
                           <label  class="form-label">Senha</label>
-                          <input type="password" class="form-control">
+                          <input type="password" class="form-control" name="password">
                         </div>
                         <button type="submit" class="btn btn-primary">Entrar</button>
                       </form>

@@ -1,7 +1,7 @@
 exports.meuMiddleware = (req, res, next) => {
-    res.locals.umaVariavelLocal = 'este é um valor global';
-    console.log('Passando pelo middleware global');
-    console.log('no seu arquivo middleware.js');
+    res.locals.errors = req.flash('errors');
+    res.locals.success = req.flash('success');
+
     next();
 }
 

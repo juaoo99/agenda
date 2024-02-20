@@ -22,7 +22,8 @@
     "express-session": "^1.18.0",
     "helmet": "^7.1.0",
     "mongoose": "^8.1.1",
-    "regenerator-runtime": "^0.13.11"
+    "regenerator-runtime": "^0.13.11",
+    "validator": "^13.11.0"
   },
   "devDependencies": {
     "@babel/cli": "^7.21.5",
