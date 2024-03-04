@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
-const validator = require('validator');
+const validator = require('validator');//adicionado para validar se o email é valido
+const bcrypt = require('bcryptjs');//adicionado para esconder a senha 
 
 //estupulando as regras para a criação de dados no mongoDB (que é noSQL)
 const LoginSchema = new mongoose.Schema({
@@ -17,14 +18,41 @@ class Login {
         this.user = null;
     }
 
+    async login() {
+        this.valida();
+        if(this.errors > 0) return; 
+
+        this.user = await LoginModel.findOne({email: this.body.email});
+
+        if(!this.user) {
+           this.errors.push('Usuário não existe'); 
+           return;
+        } 
+
+        if(!bcrypt.compareSync(this.body.password, this.user.password)){
+            this.errors.push('Senha inválida');
+            this.user = null;
+            return;
+        }
+    }
+
     async register() {
         this.valida();
         if(this.errors > 0) return;
-        try {
-            this.user = await LoginModel.create(this.body);
-        } catch(e) {
-            console.log(e, 'Não foi possível registrar usuário');   
-        }
+        
+        await this.userExist();
+
+        if(this.errors > 0) return;
+        
+        const salt = await bcrypt.genSalt();
+        this.body.password = bcrypt.hashSync(this.body.password, salt);
+
+        this.user = await LoginModel.create(this.body);
+
+    }
+
+    async userExist() {
+        if(this.user) this.errors.push('Usuário ja existe');
     }
 
 
