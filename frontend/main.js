@@ -1,7 +1,12 @@
-import './assets/css/style.css';
+//import './assets/css/style.css';
 import  'core-js/stable';
 import 'regenerator-runtime/runtime';
 
+import Login from './modules/login';
 
-//serve de template para projetos futuros por ja conter:
-//webpack, babel, express...
+const login = new Login('.form-login');
+
+const cadastro = new Login('.form-cadastro')
+ 
+login.init();
+cadastro.init();
